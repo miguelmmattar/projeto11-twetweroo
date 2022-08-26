@@ -18,7 +18,7 @@ server.post('/sign-up', function(req, res) {
 
     users.push(req.body);
     
-    res.status(200).send('Ok');
+    res.status(201).send('Ok');
 });
 
 server.post('/tweets', function(req, res) {
@@ -29,7 +29,7 @@ server.post('/tweets', function(req, res) {
     
     tweets.push(req.body);
 
-    res.status(200).send('Ok');
+    res.status(201).send('Ok');
 });
 
 server.get('/tweets', function(req, res) {
