@@ -11,15 +11,25 @@ let users = [];
 let tweets = [];
 
 server.post('/sign-up', function(req, res) {
+    if(!req.body.username || !req.body.avatar) {
+        res.status(400).send('Todos os campos são obrigatórios!');
+        return;
+    } 
+
     users.push(req.body);
     
-    res.send('Ok');
+    res.status(200).send('Ok');
 });
 
 server.post('/tweets', function(req, res) {
+    if(!req.body.username || !req.body.tweet) {
+        res.status(400).send('Todos os campos são obrigatórios!');
+        return;
+    } 
+    
     tweets.push(req.body);
-    console.log(tweets);
-    res.send('Ok');
+
+    res.status(200).send('Ok');
 });
 
 server.get('/tweets', function(req, res) {
