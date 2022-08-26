@@ -1,43 +1,40 @@
 import express from 'express';
+import cors from 'cors';
 
 const server = express();
+
+server.use(cors());
+server.use(express.json());
 
 let users = [];
 
 let tweets = [];
 
 server.post('/sign-up', function(req, res) {
-    console.log(req);
-    users.push({
-        username: '',
-        avatar: ''
-    });
-
+    users.push(req.body);
+    
     res.send('Ok');
 });
 
 server.post('/tweets', function(req, res) {
-    tweets.push({
-        username: '',
-        tweet: ''
-    });
-
+    tweets.push(req.body);
+    console.log(tweets);
     res.send('Ok');
 });
 
 server.get('/tweets', function(req, res) {
     let lastTweets = [];
-    let n = 0;
+    let n = -1;
 
     if(tweets.length >= 10) {
         n = tweets.length - 11;
     }
 
     for(let i = tweets.length - 1; i > n; i --) {
-        let avatar = users.filter(user => user.username === tweets[i].username).avatar;
+        let avatar = users.find(user => user.username === tweets[i].username).avatar;
 
         lastTweets.push({
-            username: tweets[i].user,
+            username: tweets[i].username,
             avatar: avatar,
             tweet: tweets[i].tweet
         });
